@@ -164,3 +164,23 @@ class AboutScreen extends StatelessWidget {
     );
   }
 }
+
+
+//Example of a stream builder
+class DemoApp extends StatelessWidget {
+  const DemoApp({ Key? key }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder<int>(
+      stream: Stream.fromIterable([1,2,3,4]),
+      builder: (context, snapshot) {
+        var count = snapshot.data;
+
+        //add UI here
+
+        return Text('$count');
+      },
+    );
+  }
+}
