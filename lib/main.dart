@@ -46,7 +46,9 @@ class _AppState extends State<App> {
         }
 
         // Otherwise, show something whilst waiting for initialization to complete
-        return Text('loading');
+        return  Text(
+          'loading',
+          textDirection: TextDirection.ltr);
       },
     );
   }
