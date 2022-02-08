@@ -40,4 +40,22 @@ class FirestoreService {
      }
    });
  }
+
+ Future<void> updateUserReport(Quiz quiz) {
+   var user = AuthService().user!;
+   var ref = _db.collection('reports').doc(user.uid);
+
+   //firestore expects map with strings as keys and dynamic types as values
+   var data = {
+     //increment total by 1 or set to 1 if 0
+     'total': FieldValue.increment(1),
+     'topics': {
+       //merge quiz value into a Firestore list
+       quiz.topic: FieldValue.arrayUnion([quiz.id])
+     }
+   };
+
+  //merge: true makes it a non-destructive write
+   return ref.set(data, SetOptions(merge: true));
+ }
 }
