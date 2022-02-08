@@ -19,4 +19,11 @@ class FirestoreService {
     return topics.toList();
   }
  
+ //Retrieves a single quiz document
+ Future<Quiz> getQuiz(String quizId) async {
+   var ref = _db.collection('quizzes').doc(quizId);
+   var snapshot = await ref.get();
+   return Quiz.fromJson(snapshot.data() ?? {});
+ }
+ 
 }
