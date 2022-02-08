@@ -44,6 +44,7 @@ class LoginButton extends StatelessWidget {
           backgroundColor: color,
         ),
         onPressed: () => loginMethod(),
+        label: Text(text, textAlign: TextAlign.center),
       ),
       
     );
