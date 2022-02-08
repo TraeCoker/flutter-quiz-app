@@ -1,14 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:quizapp/services/auth.dart';
 
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({ Key? key }) : super(key: key);
+  const LoginScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Login'),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          const FlutterLogo(
+            size: 150,
+          ),
+          Flexible(
+            child: LoginButton(
+              icon: FontAwesomeIcons.userNinja,
+              text: 'Continue as Guest',
+              loginMethod: AuthService().anonLogin,
+              color: Colors.deepPurple,
+            ),
+          )
+        ],
       ),
     );
   }
@@ -21,12 +36,12 @@ class LoginButton extends StatelessWidget {
   final Function loginMethod;
 
   const LoginButton(
-    { Key? key,
-    required this.text,
-    required this.icon,
-    required this.color,
-    required this.loginMethod })
-     : super(key: key);
+      {Key? key,
+      required this.text,
+      required this.icon,
+      required this.color,
+      required this.loginMethod})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +50,7 @@ class LoginButton extends StatelessWidget {
       //elevated same as reqular button but requires an icon. default to left
       child: ElevatedButton.icon(
         icon: Icon(
-          icon, 
+          icon,
           color: Colors.white,
           size: 20,
         ),
@@ -46,7 +61,6 @@ class LoginButton extends StatelessWidget {
         onPressed: () => loginMethod(),
         label: Text(text, textAlign: TextAlign.center),
       ),
-      
     );
   }
 }
