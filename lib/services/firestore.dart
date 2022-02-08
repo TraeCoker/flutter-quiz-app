@@ -25,5 +25,19 @@ class FirestoreService {
    var snapshot = await ref.get();
    return Quiz.fromJson(snapshot.data() ?? {});
  }
- 
+
+ //Listens to current user's report document in Firestore
+ //pattern is useful for listening to a realtime stream that depends on the 
+ //user's UID
+ Stream<Report> streamReport() {
+   return AuthService().userStream.switchMap((user) { 
+     if (user != null) {
+       var ref = _db.collection('reports').doc(user.uid);
+       return ref.snapshots().map((doc) => Report.fromJson(doc.data()!));
+     } else {
+       //return default report if no user
+       return Stream.fromIterable([Report()]);
+     }
+   });
+ }
 }
