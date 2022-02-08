@@ -43,6 +43,7 @@ class LoginButton extends StatelessWidget {
           padding: const EdgeInsets.all(24),
           backgroundColor: color,
         ),
+        onPressed: () => loginMethod(),
       ),
       
     );
