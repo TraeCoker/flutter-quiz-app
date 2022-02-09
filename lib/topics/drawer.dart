@@ -67,7 +67,7 @@ class  QuizList extends StatelessWidget {
                     builder: (BuildContext context) =>
                     QuizScreen(quizId: quiz.id),
                   ),
-                )
+                );
               },
               child: Container(
                 padding: const EdgeInsets.all(8),
