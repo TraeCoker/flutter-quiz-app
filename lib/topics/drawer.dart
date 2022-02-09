@@ -86,3 +86,22 @@ class  QuizList extends StatelessWidget {
     );
   }
 }
+
+class QuizBadge extends StatelessWidget {
+  final String quizId;
+  final Topic topic;
+
+  const QuizBadge({ Key? key, required this.quizId, required this.topic  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    //uses StreamProvider Reports() from main
+    Report report = Provider.of<Report>(context);
+    List completed = report.topics[topic.id] ?? [];
+    if (completed.contains(quizId)) {
+      return const Icon(FontAwesomeIcons.checkDouble, color: Colors.green);
+    } else {
+      return const Icon(FontAwesomeIcons.solidCircle, color: Colors.grey);
+    }
+  }
+}
