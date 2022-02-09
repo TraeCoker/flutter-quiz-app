@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class QuizScreen extends StatelessWidget {
-  const QuizScreen({ Key? key }) : super(key: key);
+  final String quizId;
+
+  const QuizScreen({ Key? key, required this.quizId }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      
+    return ChangeNotifierProvider(
+      //instantiates a custom class for managing state
+      create: (_) => QuizState(), 
     );
   }
 }
