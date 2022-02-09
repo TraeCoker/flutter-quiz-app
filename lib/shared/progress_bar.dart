@@ -83,6 +83,16 @@ class TopicProgress extends StatelessWidget {
       ),
     );
   }
+
+  double _calculateProgress(Topic topic, Report report) {
+    try {
+      int totalQuizzes = topic.quizzes.length;
+      int completedQuizzes = report.topics[topic.id].length;
+      return completedQuizzes / totalQuizzes;
+    } catch (err) {
+      return 0.0;
+    }
+  }
 }
 
 
