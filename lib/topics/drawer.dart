@@ -1,0 +1,88 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
+import 'package:quizapp/quiz/quiz.dart';
+import 'package:quizapp/services/models.dart';
+
+class TopicDrawer extends StatelessWidget {
+  final List<Topic> topics;
+
+  const TopicDrawer({ Key? key, required this.topics }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      //useful when you have a list broken down into multiple sections
+      child: ListView.separated(
+        shrinkWrap: true,
+        itemCount: topics.length,
+        //main content of individual item
+        itemBuilder: (BuildContext context, int idx) {
+          Topic topic = topics[idx];
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 10, left: 10),
+                child: Text(
+                  topic.title,
+                  //textAlign: TextAlign.Left
+                  style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white70,
+                  ),
+                ),
+              ),
+              QuizList(topic: topic)
+            ],
+          );
+        },
+        //builds a widget in between items
+        separatorBuilder: (BuildContext context, int idx ) => const Divider()),
+    );
+  }
+}
+
+class  QuizList extends StatelessWidget {
+  final Topic topic;
+
+  const QuizList({ Key? key, required this.topic }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: topic.quizzes.map(
+        (quiz) {
+          return Card(
+            shape: 
+            const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
+            elevation: 4,
+            margin: const EdgeInsets.all(4),
+            child: InkWell(
+              onTap: () {
+                
+              },
+              child: Container(
+                padding: const EdgeInsets.all(8),
+                child: ListTile(
+                  title: Text(
+                    quiz.title,
+                    style: Theme.of(context).textTheme.headline5,
+                  ),
+                  subtitle: Text(
+                    quiz.description,
+                    overflow: TextOverflow.fade,
+                    style: Theme.of(context).textTheme.subtitle2,
+                  ),
+                  leading: QuizBadge(topic: topic, quizId: quiz.id),
+                ),
+              ),
+            ),
+          );
+        },
+      ).toList(),
+    );
+  }
+}

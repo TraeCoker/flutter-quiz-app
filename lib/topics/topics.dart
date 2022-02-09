@@ -28,6 +28,9 @@ class TopicsScreen extends StatelessWidget {
               backgroundColor: Colors.deepPurple,
               title: const Text('topics'),
             ),
+
+            drawer: TopicDrawer(topics: topics),
+            
             body: GridView.count(
               primary: false,
               padding: const EdgeInsets.all(20.0),
