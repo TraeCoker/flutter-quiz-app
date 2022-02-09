@@ -68,9 +68,15 @@ class TopicProgress extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    return Container(
-      
+    Report report = Provider.of<Report>(context);
+    return Row(
+      children: [
+        _progressCount(report, topic),
+        Expanded(
+          child: AnimatedProgressbar(
+            value: _calculateProgress(topic, report), height: 8),
+          ),
+      ],
     );
   }
 
