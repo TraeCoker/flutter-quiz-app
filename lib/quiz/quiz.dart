@@ -37,6 +37,11 @@ class QuizScreen extends StatelessWidget {
                 onPressed: () => Navigator.pop(context),
               ),
             ),
+            body: PageView.builder(
+              //keep users from swiping between pages
+              physics: const NeverScrollableScrollPhysics(),
+              
+            ),
           );
         },
       ),

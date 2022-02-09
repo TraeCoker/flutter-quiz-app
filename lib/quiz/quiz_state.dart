@@ -10,6 +10,8 @@ class QuizState with ChangeNotifier {
   double get progress => _progress;
   Option? get selected => _selected;
 
+  
+
   set progress(double newValue) {
     _progress = newValue;
     notifyListeners();
