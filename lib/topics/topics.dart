@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quizapp/services/firestore.dart';
 import 'package:quizapp/shared/bottom_nav.dart';
+import 'package:quizapp/shared/loading.dart';
 
 class TopicsScreen extends StatelessWidget {
   const TopicsScreen({ Key? key }) : super(key: key);
@@ -12,7 +13,7 @@ class TopicsScreen extends StatelessWidget {
       future: FirestoreService().getTopics(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting){
-
+          return const LoadingScreen();
         } else if (snapshot.hasError) {
 
         } else if (snapshot.hasData) {
