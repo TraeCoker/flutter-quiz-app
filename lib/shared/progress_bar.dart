@@ -1,6 +1,6 @@
-import 'dart:collection';
-
 import 'package:flutter/material.dart';
+import 'package:quizapp/services/services.dart';
+import 'package:provider/provider.dart';
 
 class AnimatedProgressbar extends StatelessWidget {
   final double value;
@@ -60,5 +60,29 @@ class AnimatedProgressbar extends StatelessWidget {
 
 }
 
+
+class TopicProgress extends StatelessWidget {
+  final Topic topic;
+
+  const TopicProgress({ Key? key, required this.topic }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+
+    return Container(
+      
+    );
+  }
+
+  Widget _progressCount(Report report, Topic topic) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 8),
+      child: Text(
+        '${report.topics[topic.id]?.length ?? 0} / ${topic.quizzes.length}',
+        style: const TextStyle(fontSize: 10, color: Colors.grey),
+      ),
+    );
+  }
+}
 
 
