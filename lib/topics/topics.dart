@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:quizapp/services/firestore.dart';
-import 'package:quizapp/shared/bottom_nav.dart';
+import 'package:quizapp/services/services.dart';
+import 'package:quizapp/shared/shared.dart';
 import 'package:quizapp/shared/loading.dart';
 
 class TopicsScreen extends StatelessWidget {
