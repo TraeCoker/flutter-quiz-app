@@ -20,4 +20,18 @@ class AnimatedProgressbar extends StatelessWidget {
       },
     );
   }
+
+    ///Always round negative or NaNs to min value
+  _floor(double value, [min = 0.0]) {
+    return value.sign <= min ? min : value;
+  }
+
+  _colorGen(double value) {
+    int rbg = (value * 255).toInt();
+    return Colors.deepOrange.withGreen(rbg).withRed(255 - rbg );
+  }
+
 }
+
+
+
