@@ -69,7 +69,7 @@ class StartPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var state = Provider.of<QuizState>(context);
-    
+
     return Container(
       padding: const EdgeInsets.all(20),
       child: Column(
@@ -88,6 +88,46 @@ class StartPage extends StatelessWidget {
                 icon: const Icon(Icons.poll),
               )
             ],
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class CongratsPage extends StatelessWidget {
+  final Quiz quiz;
+  const CongratsPage({ Key? key, required this.quiz }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            'Congrats! You completed the ${quiz.title} quiz',
+            textAlign: TextAlign.center,
+          ),
+          const Divider(),
+          Image.asset('assets/congrats.gif'),
+          const Divider(),
+          ElevatedButton.icon(
+            style: TextButton.styleFrom(
+              backgroundColor: Colors.green,
+            ),
+            icon: const Icon(FontAwesomeIcons.check),
+            label: const Text('Mark Complete!'),
+            onPressed: () {
+              //update database and return to topics screen
+              FirestoreService().updateUserReport(quiz);
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                '/topics',
+                (route) => false,
+              );
+            },
           )
         ],
       ),
