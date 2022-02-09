@@ -198,4 +198,50 @@ class QuestionPage extends StatelessWidget {
       ],
     );
   }
+
+  //Bottom sheet shown when Question is answered
+  _bottomSheet(BuildContext context, Option opt, QuizState state) {
+    bool correct = opt.correct;
+
+    //makes modal appear on the quiz stack
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          height: 250,
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Text(correct ? 'Good Job!' : 'Wrong'),
+              Text(
+                opt.detail,
+                style: const TextStyle(fontSize: 18, color: Colors.white54),
+              ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: correct ? Colors.green : Colors.red),
+                child: Text(
+                  correct ? 'Onward!' : 'Try Again',
+                  style: const TextStyle(
+                    color: Colors.white,
+                    letterSpacing: 1.5,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                onPressed: () {
+                  //if correct navigate, if incorrect pop off the bottom sheet
+                  if (correct) {
+                    state.nextPage();
+                  }
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
 }
