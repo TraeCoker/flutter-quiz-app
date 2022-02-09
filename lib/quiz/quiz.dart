@@ -26,23 +26,35 @@ class QuizScreen extends StatelessWidget {
             return Loader();
           } else {
             var quiz = snapshot.data!;
-          }
-
-          return Scaffold(
-            appBar: AppBar(
-              title: AnimatedProgressbar(value: state.progress),
-              //lets user exit quiz early
-              leading: IconButton(
-                icon: const Icon(FontAwesomeIcons.times),
-                onPressed: () => Navigator.pop(context),
+  
+            return Scaffold(
+              appBar: AppBar(
+                title: AnimatedProgressbar(value: state.progress),
+                //lets user exit quiz early
+                leading: IconButton(
+                  icon: const Icon(FontAwesomeIcons.times),
+                  onPressed: () => Navigator.pop(context),
+                ),
               ),
-            ),
-            body: PageView.builder(
-              //keep users from swiping between pages
-              physics: const NeverScrollableScrollPhysics(),
-              
-            ),
-          );
+              body: PageView.builder(
+                //keep users from swiping between pages
+                physics: const NeverScrollableScrollPhysics(),
+                scrollDirection: Axis.vertical,
+                controller: state.controller,
+                onPageChanged: (int idx) => 
+                    state.progress = (idx / (quiz.questions.length + 1)),
+                itemBuilder: (BuildContext context, int idx) {
+                  if (idx == 0) {
+                    return StartPage(quiz: quiz);
+                  } else if (idx == quiz.questions.length + 1) {
+                    return CongratsPage(quiz: quiz);
+                  } else {
+                    return QuestionPage(question: quiz.questions[idx - 1]);
+                  }
+                },
+              ),
+            );
+          }
         },
       ),
     );
