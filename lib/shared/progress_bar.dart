@@ -16,6 +16,33 @@ class AnimatedProgressbar extends StatelessWidget {
         return Container(
           padding:  const EdgeInsets.all(10),
           width: box.maxWidth,
+          //widgets on top of eachother, first is on bottom
+          child: Stack(
+            children: [
+              Container(
+                height: height,
+                //Progress bar background
+                decoration: BoxDecoration(
+                  color:  Theme.of(context).backgroundColor,
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(height),
+                  )
+                ),
+              ),
+              AnimatedContainer(
+                duration: const Duration(milliseconds: 800),
+                curve: Curves.easeOutCubic,
+                height: height,
+                width: box.maxWidth * _floor(value),
+                decoration: BoxDecoration(
+                  color: _colorGen(value),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(height),
+                  )
+                )
+              )
+            ],
+          ),
         );
       },
     );
